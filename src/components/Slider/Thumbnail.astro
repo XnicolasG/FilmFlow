@@ -1,13 +1,17 @@
 ---
+
+import SliderButtons from "./SliderButtons.astro";
+
 const { movies } = Astro.props;
 ---
 
-<section class="thumbanail">
+<section class="thumbnail">
+    <SliderButtons />
     {
         movies.map((movie:any) => (
-            <div class="thumbnail__item">
+            <div class="thumbnail__item ">
                 <img src={movie.thumbnail} alt={movie.name} />
-                <article class="thumbnail__content">
+                <article class="thumbnail__content ">
                     <p>{movie.name}</p>
                     <p></p>
                 </article>

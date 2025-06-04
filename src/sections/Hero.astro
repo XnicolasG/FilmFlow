@@ -1,4 +1,5 @@
 ---
+// import SliderButtons from "../components/Slider/SliderButtons.astro";
 import SliderItem from "../components/Slider/SliderItem.astro";
 import Thumbnail from "../components/Slider/Thumbnail.astro"
 
@@ -32,9 +33,10 @@ const movies = [
 ];
 
 ---
-<main class="carousel">
+<main class="carousel next">
     <section class="list">
         <SliderItem movies={movies} />
         <Thumbnail movies={movies} />
+        <!-- <SliderButtons /> -->
     </section>
 </main>
