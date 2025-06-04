@@ -1,0 +1,17 @@
+---
+const { movies } = Astro.props;
+---
+
+<section class="thumbanail">
+    {
+        movies.map((movie:any) => (
+            <div class="thumbnail__item">
+                <img src={movie.thumbnail} alt={movie.name} />
+                <article class="thumbnail__content">
+                    <p>{movie.name}</p>
+                    <p></p>
+                </article>
+            </div>
+        ))
+    }
+</section>

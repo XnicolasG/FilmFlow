@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+/*--- slider --- */
+.carousel{
+    @apply w-svw h-svh overflow-hidden relative  
+}
+.carousel .list .item{
+    @apply absolute inset-0 
+}
+.carousel .list .item img{
+    @apply w-full h-full object-cover
+}
+.carousel .list .item .content{
+    @apply absolute top-26 w-[1126px] max-w-[80%] left-1/2 -translate-x-1/2 text-shadow-sm text-shadow-black/80 text-pretty 
+}
+
+.carousel .list .item .content p:nth-child(1){
+    @apply text-5xl font-bold tracking-wider;
+    mix-blend-mode: difference;
+}
+.carousel .list .item .content p:nth-child(3){
+    @apply text-cyan-600
+}
+/* -- thumbnail -- */
