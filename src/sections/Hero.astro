@@ -1,12 +1,12 @@
 ---
-// import SliderButtons from "../components/Slider/SliderButtons.astro";
 import SliderItem from "../components/Slider/SliderItem.astro";
-import Thumbnail from "../components/Slider/Thumbnail.astro"
+import Thumbnail from "../components/Slider/Thumbnail.astro";
 
 const movies = [
     {
         image: "https://image.tmdb.org/t/p/original/nAxGnGHOsfzufThz20zgmRwKur3.jpg",
-        thumbnail: "https://image.tmdb.org/t/p/w1280/gL6puhup6PXqrKqItWbGA8LF529.jpg",
+        thumbnail:
+            "https://image.tmdb.org/t/p/w1280/gL6puhup6PXqrKqItWbGA8LF529.jpg",
         name: "Pecadores",
         year: 2025,
         genre: ["Terror", "acción"],
@@ -16,7 +16,8 @@ const movies = [
     },
     {
         image: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
-        thumbnail: "https://www.themoviedb.org/t/p/w1280/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg",
+        thumbnail:
+            "https://www.themoviedb.org/t/p/w1280/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg",
         name: "Cómo entrenar a tu dragón",
         year: 2025,
         genre: ["Fantasía", "acción"],
@@ -24,19 +25,22 @@ const movies = [
     },
     {
         image: "https://image.tmdb.org/t/p/original/uQ4lG7E7mlyKsGvbASftQ6Hu2IX.jpg",
-        thumbnail: "https://www.themoviedb.org/t/p/w1280/tNQWO6cNzQYCyvw36mUcAQQyf5F.jpg",
+        thumbnail:
+            "https://www.themoviedb.org/t/p/w1280/tNQWO6cNzQYCyvw36mUcAQQyf5F.jpg",
         name: "The Last of Us",
         year: 2023,
         genre: ["Drama"],
         about: `Año 2023, veinte años después del comienzo de una plaga mundial que infectó a población con un hongo mutado transformando a las personas en unas criaturas caníbales, el contrabandista Joel tiene la misión de escoltar a la adolescente Ellie por un mundo postapocalíptico en el nada va a ser fácil para los viajeros. Joel todavía vive atormentado por el recuerdo de su única hija. Ellie es portadora de algo que podría cambiar el destino de la humanidad ¿Conseguirán sobrevivir los dos?`,
     },
 ];
+let currentDirection;
 
 ---
-<main class="carousel next">
+
+<main id='carousel' class=`carousel ${currentDirection}` data-index="0">
     <section class="list">
-        <SliderItem movies={movies} />
-        <Thumbnail movies={movies} />
-        <!-- <SliderButtons /> -->
+        <SliderItem movies={movies}  />
+        <Thumbnail movies={movies}  />
+        <div class="time"></div>
     </section>
 </main>
