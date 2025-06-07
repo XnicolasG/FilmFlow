@@ -1,19 +1,15 @@
 ---
 import "../styles/global.css";
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar/Navbar.astro'
-import Hero from "../sections/Hero.astro";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar/Navbar.astro";
+import { Hero } from "../sections/Hero";
 
-
-const key = import.meta.env.PUBLIC_APIKEY
-
+const key = import.meta.env.PUBLIC_APIKEY;
 ---
 
 <Layout>
 	<Navbar />
-	<Hero /> 
+	<Hero client:visible />
 </Layout>
 
-<script>
-
-</script>
+<script></script>
