@@ -52,21 +52,21 @@
     @apply text-cyan-600
 }
 
-@media (width < 500){}
+@media (width < 500) {}
 
 /* -- thumbnail -- */
 .thumbnail {
-    @apply flex absolute left-[50%]  gap-5  bottom-14 text-stone-100 z-30;
+    @apply flex absolute left-[40%] gap-5 bottom-10 text-stone-100 z-30;
     width: max-content;
 }
 
 .thumbnail .thumbnail__item {
-    @apply w-40 h-60 relative hover:scale-110 hover:shadow-2xl hover:shadow-black hover:bg-black/80 transition-all duration-150;
+    @apply w-40 h-60 relative rounded  overflow-hidden hover:outline-3 outline-stone-100  hover:shadow-2xl hover:shadow-black hover:bg-black/80 transition-all duration-200;
     flex-shrink: 0;
 }
 
 .thumbnail .thumbnail__item img {
-    @apply w-full h-full object-cover rounded
+    @apply w-full h-full object-cover rounded hover:scale-110 transition-all duration-200
 }
 
 .thumbnail .thumbnail__item .thumbnail__content {
@@ -78,12 +78,14 @@
     /* text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5); */
     transition: all .5s ease-in-out;
 }
-@media ( width < 500px){
-    .thumbnail{
-        left:35%;
+
+@media (width < 500px) {
+    .thumbnail {
+        left: 35%;
         bottom: 30px;
     }
 }
+
 /* -- Arrows -- */
 .arrows {
     @apply flex justify-center items-center w-24 max-w-[30%] gap-3.5
@@ -98,6 +100,7 @@
 .carousel.next .list .item:nth-child(1) img {
     width: 150px;
     height: 220px;
+    margin-top: 54px;
     position: absolute;
     left: 60%;
     bottom: 50px;
@@ -162,7 +165,7 @@
 
 @keyframes showThumbnail {
     to {
-        width: 150px;
+        width: 160px;
     }
 }
 
@@ -176,6 +179,7 @@
         filter: blur(20px) opacity(0)
     }
 }
+
 /* -- time -- */
 .time {
     width: 0%;
@@ -187,13 +191,62 @@
     top: 0;
     left: 0;
 }
+
 .carousel.next .time,
-.carousel.prev .time{
+.carousel.prev .time {
     width: 100%;
     animation: timeRunning 1s linear 1 forwards;
 }
+
 @keyframes timeRunning {
-    to{
+    to {
         width: 0;
     }
+}
+
+/* -- Cards -- */
+.dailyCards {
+    @apply flex gap-18 mt-16 m-12;
+}
+
+.dailyCards__figure {
+    @apply z-10 w-40 rounded-lg overflow-hidden shadow-md hover:scale-110 transition-all duration-200
+}
+
+.dailyCards__figure::after {
+    content: "";
+    position: absolute;
+    width: 90%;
+    height: 95%;
+    inset: 0;
+    background: inherit;
+    filter: blur(40px) saturate(1.5);
+    z-index: -2;
+}
+
+.dailyCards__number {
+    @apply absolute text-shadow-sm -top-18 -left-12.5 -z-10 text-9xl text-stone-100/50 transition-all duration-200
+}
+
+.dailyCards__number.gold {
+    @apply text-yellow-300 text-shadow-yellow-400/80
+}
+
+.dailyCards__number.silver {
+    @apply text-blue-100 text-shadow-blue-500
+}
+
+.dailyCards__number.bronce {
+    @apply text-orange-300 text-shadow-orange-500
+}
+
+.dailyCards__item:hover .dailyCards__number {
+    @apply z-50 translate-x-10 scale-110 transition-all duration-200;
+}
+
+/* -- grid -- */
+.moviesGrid__container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 4%;
 }

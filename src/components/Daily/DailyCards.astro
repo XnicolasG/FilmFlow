@@ -1,0 +1,25 @@
+---
+const { movies } = Astro.props;
+---
+
+<ul class="dailyCards">
+    {
+        movies.map((movie: any, i: any) => {
+            let color;
+            i === 0
+            ? color = 'gold'
+            : i === 1
+            ? color = 'silver'
+            : i === 2
+            ? color = 'bronce'
+            : color = '' 
+            return (
+            <li class="relative dailyCards__item">
+                <figure style={{backgroundImage: `url(${movie.thumbnail})`}} class={`dailyCards__figure ${color} group-hover:-z-10`}>
+                    <img class="relative" src={movie.thumbnail} alt={movie.title} />
+                </figure>
+                <p class={`dailyCards__number ${color} ` }>{(i += 1)}</p>
+            </li>
+        )})
+    }
+</ul>

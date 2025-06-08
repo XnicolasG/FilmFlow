@@ -1,0 +1,9 @@
+---
+import DailyCards from "../components/Daily/DailyCards.astro"
+
+const { movies } = Astro.props
+---
+<section class="daily p-4">
+    <h2 class="daily__title font-semibold italic text-stone-100 text-4xl">Daily top</h2>
+    <DailyCards movies={movies} />
+</section>

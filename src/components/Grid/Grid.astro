@@ -1,0 +1,22 @@
+---
+const { movies, title } = Astro.props;
+---
+
+<section class="moviesGrid">
+    <h2>{title}</h2>
+    <ul class="moviesGrid__container">
+        {
+            movies.map((movie: any) => (
+                <a class="moviesGrid__container" target="_blank" href="">
+                    <figure class="overflow-hidden rounded">
+                        <img
+                            class=" w-full h-auto hover:scale-110 object-cover transition-all duration-200 "
+                            src={movie.thumbnail}
+                            alt={movie.title}
+                        />
+                    </figure>
+                </a>
+            ))
+        }
+    </ul>
+</section>

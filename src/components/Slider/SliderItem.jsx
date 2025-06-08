@@ -4,7 +4,7 @@ export const SliderItem = ({ movies }) => {
             {
                 movies.map((movie) => (
                     <div className="item text-white">
-                        <img className='lg:mt-14' src={movie.image} alt={movie.name} />
+                        <img className='' src={movie.image} alt={movie.name} />
                         <article className="content">
                             <p>{movie.name}</p>
                             <p>{movie.year}</p>
