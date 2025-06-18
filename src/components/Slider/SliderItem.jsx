@@ -3,13 +3,15 @@ export const SliderItem = ({ movies }) => {
         <>
             {
                 movies.map((movie) => (
-                    <div className="item text-white">
-                        <img className='' src={movie.image} alt={movie.name} />
+                    <div 
+                    key={movie.id}
+                    className="item text-white">
+                        <img className='' src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`} alt={movie.name} />
                         <article className="content">
-                            <p>{movie.name}</p>
-                            <p>{movie.year}</p>
-                            <p>{movie.genre}</p>
-                            <p>{movie.about}</p>
+                            <p>{movie.title}</p>
+                            <p>{movie.release_date}</p>
+                            {/* <p>{movie.genre}</p> */}
+                            <p>{movie.overview}</p>
                         </article>
                     </div>
                 ))

@@ -7,11 +7,7 @@ export const Thumbnail = ({ movies, onNext, onPrev }) => {
             {
                 movies.map((movie) => (
                     <div className={`thumbnail__item`}>
-                        <img src={movie.thumbnail} alt={movie.name} />
-                        <article className="thumbnail__content ">
-                            <p>{movie.name}</p>
-                            <p></p>
-                        </article>
+                        <img src={movie.thumbnail} alt={movie.name} />                    
                     </div>
                 ))
             }

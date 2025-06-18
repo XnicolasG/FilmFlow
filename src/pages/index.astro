@@ -48,6 +48,14 @@ const key = import.meta.env.PUBLIC_APIKEY;
             about: `Eve Macarro intenta por todos los medios averiguar quién está detrás del asesinato de su padre. En su lucha por conocer la verdad, tendrá que atenerse a las normas de la Alta Mesa y, por supuesto, a las del Hotel Continental, donde descubrirá que existen secretos ocultos sobre su pasado.`,
         },
     ];
+
+    const getTrendingMoviesdata = async () => {
+        const resp = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key='+key)
+        const data = await resp.json()
+        console.log(data.results);
+        return data.results.slice(0,5)
+    }
+    getTrendingMoviesdata()
 ---
 
 <Layout>
@@ -57,4 +65,14 @@ const key = import.meta.env.PUBLIC_APIKEY;
 	<Grid movies={movies} title={'Movies'} />
 </Layout>
 
-<script></script>
+<script>
+const key = import.meta.env.PUBLIC_APIKEY;
+
+    const getTrendingMoviesdata = async () => {
+        const resp = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key='+key)
+        const data = await resp.json()
+        console.log(data.results.slice(0,5));
+        
+    }
+    getTrendingMoviesdata()
+</script>
