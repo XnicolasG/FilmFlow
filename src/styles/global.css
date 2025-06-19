@@ -6,7 +6,7 @@
 }
 
 .carousel .list .item {
-    @apply absolute inset-0
+    @apply absolute inset-0 bg-black
 }
 
 .carousel .list .item:nth-child(1) {
@@ -16,9 +16,11 @@
 .carousel .list .item img {
     @apply w-full h-full object-cover
 }
-
+.carousel .list .item .content .item .item__cover{
+    @apply absolute top-1 w-full h-full bg-amber-300
+}
 .carousel .list .item .content {
-    @apply absolute top-26 w-[1126px] max-w-[80%] left-1/2 -translate-x-1/2 text-shadow-sm text-shadow-black/80 text-pretty
+    @apply absolute flex flex-col gap-2.5 top-26 w-[1126px] max-w-[80%] left-1/2 -translate-x-1/2 text-shadow-md text-shadow-black/80 text-pretty
 }
 
 /* .carousel .list .item .content p, */
@@ -48,15 +50,15 @@
     animation-delay: 1s;
 }
 
-.carousel .list .item .content p:nth-child(3) {
-    @apply text-cyan-600
+.content_genre {
+    @apply text-cyan-600 bg-black/80 w-fit p-1 px-2 rounded-2xl outline-2 outline-cyan-700
 }
 
 @media (width < 500) {}
 
 /* -- thumbnail -- */
 .thumbnail {
-    @apply flex absolute left-[40%] gap-5 bottom-10 text-stone-100 z-30;
+    @apply flex absolute left-[25%] md:left-[34%] gap-5 bottom-10 text-stone-100 z-30;
     width: max-content;
 }
 

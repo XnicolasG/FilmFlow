@@ -60,7 +60,7 @@ const key = import.meta.env.PUBLIC_APIKEY;
 
 <Layout>
 	<Navbar />
-	<Hero movies={movies} client:visible />
+	<Hero client:visible />
 	<DailyTop movies={movies} />
 	<Grid movies={movies} title={'Movies'} />
 </Layout>

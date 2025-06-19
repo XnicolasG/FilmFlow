@@ -7,7 +7,7 @@ export const Thumbnail = ({ movies, onNext, onPrev }) => {
             {
                 movies.map((movie) => (
                     <div className={`thumbnail__item`}>
-                        <img src={movie.thumbnail} alt={movie.name} />                    
+                        <img src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt={movie.title} />                    
                     </div>
                 ))
             }

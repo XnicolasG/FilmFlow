@@ -1,11 +1,20 @@
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { SliderItem } from "../components/Slider/SliderItem";
 import { Thumbnail } from "../components/Slider/Thumbnail";
-
-export const Hero = ({ movies }) => {
+import { useMovies } from "../Hooks/useMovies";
+export const Hero = () => {
     const [currentDirection, setCurrentDirection] = useState('')
-   
-    const [thumbnails, setThumbnails] = useState(movies);
+    const [thumbnails, setThumbnails] = useState([])
+    const { movies, loading, error } = useMovies({ path: 'trending/movie/week', params: { sort_by: "popularity.desc" } })
+    useEffect(() => {
+        if (movies.length) {
+            setThumbnails(movies.slice(0,5));
+        }
+    }, [movies]);
+
+
+
+
 
     const handleNext = () => {
         setCurrentDirection("next");
