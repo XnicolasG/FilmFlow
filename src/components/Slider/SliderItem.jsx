@@ -18,7 +18,7 @@ export const SliderItem = ({ movies }) => {
                             <img className=''
                                 src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
                                 alt={movie.title} />
-                                <span className="item__cover absolute top-1 w-full h-full bg-black/50"/>
+                                <span className="item__cover absolute top-1 w-full h-full bg-black/50 "/>
                             <article className="content">
                                 <p>{movie.title}</p>
                                 <p>{movie.release_date}</p>

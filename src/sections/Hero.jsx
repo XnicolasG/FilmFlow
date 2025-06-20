@@ -13,9 +13,6 @@ export const Hero = () => {
     }, [movies]);
 
 
-
-
-
     const handleNext = () => {
         setCurrentDirection("next");
         setThumbnails(prev => {

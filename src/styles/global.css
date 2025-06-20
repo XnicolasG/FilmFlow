@@ -207,10 +207,25 @@
 }
 
 /* -- Cards -- */
+button {
+  @apply size-10 rounded-full bg-white/30 hover:bg-white/60 text-white p-2  transition-opacity;
+}
 .dailyCards {
-    @apply flex gap-18 mt-16 m-12;
+    @apply flex gap-18 mt-16 m-12  scroll-smooth;
+}
+.dailyCards::-webkit-scrollbar {
+  display: none;
 }
 
+.dailyCards {
+  @apply flex gap-18 px-8 overflow-x-auto scroll-smooth;
+}
+.dailyCards__item {
+  @apply w-44 flex-shrink-0;
+}
+.dailyCards__figure img {
+  @apply w-full h-full object-cover;
+}
 .dailyCards__figure {
     @apply z-10 w-40 rounded-lg overflow-hidden shadow-md hover:scale-110 transition-all duration-200
 }
@@ -222,7 +237,7 @@
     height: 95%;
     inset: 0;
     background: inherit;
-    filter: blur(40px) saturate(1.5);
+    filter: blur(30px) saturate(1.5);
     z-index: -2;
 }
 
