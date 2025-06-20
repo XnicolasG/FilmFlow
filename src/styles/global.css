@@ -211,7 +211,7 @@ button {
   @apply size-10 rounded-full bg-white/30 hover:bg-white/60 text-white p-2  transition-opacity;
 }
 .dailyCards {
-    @apply flex gap-18 mt-16 m-12  scroll-smooth;
+    @apply flex justify-start gap-18  m-12  scroll-smooth;
 }
 .dailyCards::-webkit-scrollbar {
   display: none;
@@ -242,7 +242,7 @@ button {
 }
 
 .dailyCards__number {
-    @apply absolute text-shadow-sm -top-18 -left-12.5 -z-10 text-9xl text-stone-100/50 transition-all duration-200
+    @apply absolute text-shadow-sm -top-18 -left-12.5 -z-10 text-9xl text-stone-300/50 transition-all duration-200
 }
 
 .dailyCards__number.gold {

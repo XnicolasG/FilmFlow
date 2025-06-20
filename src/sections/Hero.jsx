@@ -5,13 +5,25 @@ import { useMovies } from "../Hooks/useMovies";
 export const Hero = () => {
     const [currentDirection, setCurrentDirection] = useState('')
     const [thumbnails, setThumbnails] = useState([])
-    const { movies, loading, error } = useMovies({ path: 'trending/movie/week', params: { sort_by: "popularity.desc" } })
+    const { movies, loading, error } = useMovies({ path: 'trending/all/week', params: { sort_by: "popularity.desc" } })
     useEffect(() => {
         if (movies.length) {
-            setThumbnails(movies.slice(0,5));
+            setThumbnails(movies.slice(0, 5));
         }
     }, [movies]);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentDirection("next");
+            setThumbnails(prev => {
+                const newOrder = [prev[prev.length - 1], ...prev.slice(0, prev.length - 1)];
+                return newOrder;
+            });
+            resetDirection();
+        }, 8000);
+
+        return () => clearInterval(interval);
+    }, [thumbnails]);
 
     const handleNext = () => {
         setCurrentDirection("next");

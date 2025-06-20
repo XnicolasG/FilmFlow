@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import Navbar from "../components/Navbar/Navbar.astro";
 ---
 
 <!doctype html>
@@ -14,6 +15,8 @@ import { ClientRouter } from "astro:transitions";
 		<ClientRouter />
 	</head>
 	<body class="bg-gray-950">
+	<Navbar />
+
 		<slot />
 	</body>
 </html>

@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar/Navbar.astro";
 import { Hero } from "../sections/Hero";
 import DailyTop from "../sections/DailyTop.astro";
 import Grid from "../components/Grid/Grid.astro";
@@ -49,30 +48,23 @@ const key = import.meta.env.PUBLIC_APIKEY;
         },
     ];
 
-    const getTrendingMoviesdata = async () => {
-        const resp = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key='+key)
-        const data = await resp.json()
-        console.log(data.results);
-        return data.results.slice(0,5)
-    }
-    getTrendingMoviesdata()
 ---
 
 <Layout>
-	<Navbar />
 	<Hero client:visible />
-	<DailyTop />
+	<DailyTop type="movie" title="Daily top 10 movies"/>
+	<DailyTop type="tv" title="Daily top 10 tv series"/>
 	<Grid movies={movies} title={'Movies'} />
 </Layout>
 
 <script>
-const key = import.meta.env.PUBLIC_APIKEY;
+// const key = import.meta.env.PUBLIC_APIKEY;
 
-    const getTrendingMoviesdata = async () => {
-        const resp = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key='+key)
-        const data = await resp.json()
-        console.log(data.results.slice(0,5));
+//     const getTrendingMoviesdata = async () => {
+//         const resp = await fetch('https://api.themoviedb.org/3/trending/all/week?api_key='+key)
+//         const data = await resp.json()
+//         console.log(data.results.slice(0,5));
         
-    }
-    getTrendingMoviesdata()
+//     }
+//     getTrendingMoviesdata()
 </script>

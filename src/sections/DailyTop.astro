@@ -1,8 +1,11 @@
 ---
-import { DailyCards } from '../components/Daily/DailyCards'
-
+import { DailyCards } from "../components/Daily/DailyCards";
+const { title, type } = Astro.props;
 ---
+
 <section class="daily bg-transparent p-4">
-    <h2 class="daily__title font-semibold italic text-stone-100 text-4xl">Daily top movies</h2>
-    <DailyCards client:visible />
+    <h2 class="daily__title font-semibold italic text-stone-100 text-4xl">
+        {title}
+    </h2>
+    <DailyCards type={type} client:visible />
 </section>

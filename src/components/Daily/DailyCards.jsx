@@ -2,10 +2,10 @@ import { useRef } from 'preact/hooks';
 import { useMovies } from '../../Hooks/useMovies';
 import { Arrow } from '../../../public/icons/Arrow';
 
-export const DailyCards = () => {
-    const { movies, loading, error } = useMovies({ path: 'trending/movie/day', params: { sort_by: "popularity.desc" } })
+export const DailyCards = ({ type }) => {
+    const { movies, loading, error } = useMovies({ path: `trending/${type}/day`, params: { sort_by: "popularity.desc" } })
     const sliderRef = useRef(null);
-    const scrollAmount = 310; // ajustable según tamaño de las cards
+    const scrollAmount = 320; // ajustable según tamaño de las cards
 
     const scrollLeft = () => {
         if (sliderRef.current) sliderRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
@@ -13,20 +13,18 @@ export const DailyCards = () => {
 
     const scrollRight = () => {
         if (sliderRef.current) sliderRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-        console.log('right');
-
     };
 
 
     return (
-        <section className="relative w-full bg-transparent ">
+        <section className="relative mx-auto w-[95%] bg-transparent ">
             <button onClick={scrollLeft} className="left-0 absolute top-1/2 -translate-y-1/2 z-10">
                 <Arrow />
             </button>
 
             <ul
                 ref={sliderRef}
-                className="dailyCards bg-transparent py-18 px-6 ">
+                className="dailyCards bg-transparent py-18 ">
                 {
                     movies.slice(0, 10).map((movie, i) => {
                         let color;
@@ -52,7 +50,7 @@ export const DailyCards = () => {
                 }
             </ul>
             <button onClick={scrollRight} className="right-0 bg-red-500  absolute top-1/2 -translate-y-1/2 z-10">
-                <Arrow style='hover:text-black rotate-180'/>
+                <Arrow style='hover:text-black rotate-180' />
             </button>
         </section>
 
