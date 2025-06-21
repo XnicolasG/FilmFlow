@@ -216,7 +216,9 @@ button {
 .dailyCards::-webkit-scrollbar {
   display: none;
 }
-
+.genreCard_Slider::-webkit-scrollbar{
+  display: none;
+}
 .dailyCards {
   @apply flex gap-18 px-8 overflow-x-auto scroll-smooth;
 }

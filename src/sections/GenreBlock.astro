@@ -1,0 +1,14 @@
+---
+import { MovieCards } from "../components/GenreBlock/GenreCard"
+
+const { genreName, genreIds } = Astro.props
+---
+<section class="px-10 mb-8">
+    <h2 class='text-slate-100 text-xl'>{genreName}</h2>
+    <MovieCards 
+    genre={genreName} 
+    genreIds={genreIds}
+    client:visible />
+</section>
+
+

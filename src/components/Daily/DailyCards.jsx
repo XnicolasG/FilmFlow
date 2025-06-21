@@ -5,7 +5,7 @@ import { Arrow } from '../../../public/icons/Arrow';
 export const DailyCards = ({ type }) => {
     const { movies, loading, error } = useMovies({ path: `trending/${type}/day`, params: { sort_by: "popularity.desc" } })
     const sliderRef = useRef(null);
-    const scrollAmount = 320; // ajustable según tamaño de las cards
+    const scrollAmount = 320;
 
     const scrollLeft = () => {
         if (sliderRef.current) sliderRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
@@ -17,7 +17,7 @@ export const DailyCards = ({ type }) => {
 
 
     return (
-        <section className="relative mx-auto w-[95%] bg-transparent ">
+        <section className="relative mx-auto bg-transparent ">
             <button onClick={scrollLeft} className="left-0 absolute top-1/2 -translate-y-1/2 z-10">
                 <Arrow />
             </button>

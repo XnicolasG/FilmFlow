@@ -4,67 +4,79 @@ import Layout from "../layouts/Layout.astro";
 import { Hero } from "../sections/Hero";
 import DailyTop from "../sections/DailyTop.astro";
 import Grid from "../components/Grid/Grid.astro";
+import GenreBlock from "../sections/GenreBlock.astro";
 
 const key = import.meta.env.PUBLIC_APIKEY;
 
- const movies = [
-        {
-            image: "https://image.tmdb.org/t/p/original/nAxGnGHOsfzufThz20zgmRwKur3.jpg",
-            thumbnail:
-                "https://image.tmdb.org/t/p/w1280/gL6puhup6PXqrKqItWbGA8LF529.jpg",
-            name: "Pecadores",
-            year: 2025,
-            genre: ["Terror", "acción"],
-            about: `Tratando de dejar atrás sus problemáticas vidas, dos hermanos gemelos
+const movies = [
+    {
+        image: "https://image.tmdb.org/t/p/original/nAxGnGHOsfzufThz20zgmRwKur3.jpg",
+        thumbnail:
+            "https://image.tmdb.org/t/p/w1280/gL6puhup6PXqrKqItWbGA8LF529.jpg",
+        name: "Pecadores",
+        year: 2025,
+        genre: ["Terror", "acción"],
+        about: `Tratando de dejar atrás sus problemáticas vidas, dos hermanos gemelos
         regresan a su pueblo natal para empezar de nuevo, solo para descubrir
         que un mal aún mayor les espera para darles la bienvenida.`,
-        },
-        {
-            image: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
-            thumbnail:
-                "https://www.themoviedb.org/t/p/w1280/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg",
-            name: "Cómo entrenar a tu dragón",
-            year: 2025,
-            genre: ["Fantasía", "acción"],
-            about: `En la escarpada isla de Berk, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón de la Furia Nocturna. Su insólito vínculo revela la verdadera naturaleza de los dragones y desafía los cimientos de la sociedad vikinga.`,
-        },
-        {
-            image: "https://image.tmdb.org/t/p/original/uQ4lG7E7mlyKsGvbASftQ6Hu2IX.jpg",
-            thumbnail:
-                "https://www.themoviedb.org/t/p/w1280/tNQWO6cNzQYCyvw36mUcAQQyf5F.jpg",
-            name: "The Last of Us",
-            year: 2023,
-            genre: ["Drama"],
-            about: `Año 2023, veinte años después del comienzo de una plaga mundial que infectó a población con un hongo mutado transformando a las personas en unas criaturas caníbales, el contrabandista Joel tiene la misión de escoltar a la adolescente Ellie por un mundo postapocalíptico en el nada va a ser fácil para los viajeros. Joel todavía vive atormentado por el recuerdo de su única hija. Ellie es portadora de algo que podría cambiar el destino de la humanidad ¿Conseguirán sobrevivir los dos?`,
-        },
-		{
-            image: "https://media.themoviedb.org/t/p/w1066_and_h600_bestv2/oPgXVSdGR9dGwbmvIToOCMmsdc2.jpg",
-            thumbnail:
-                "https://www.themoviedb.org/t/p/w1280/gQCrYmvCK7JCLXjCGTMRF5Lzr5c.jpg",
-            name: "Ballerina",
-            year: 2025,
-            genre: ["Acción"],
-            about: `Eve Macarro intenta por todos los medios averiguar quién está detrás del asesinato de su padre. En su lucha por conocer la verdad, tendrá que atenerse a las normas de la Alta Mesa y, por supuesto, a las del Hotel Continental, donde descubrirá que existen secretos ocultos sobre su pasado.`,
-        },
-    ];
-
+    },
+    {
+        image: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
+        thumbnail:
+            "https://www.themoviedb.org/t/p/w1280/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg",
+        name: "Cómo entrenar a tu dragón",
+        year: 2025,
+        genre: ["Fantasía", "acción"],
+        about: `En la escarpada isla de Berk, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón de la Furia Nocturna. Su insólito vínculo revela la verdadera naturaleza de los dragones y desafía los cimientos de la sociedad vikinga.`,
+    },
+    {
+        image: "https://image.tmdb.org/t/p/original/uQ4lG7E7mlyKsGvbASftQ6Hu2IX.jpg",
+        thumbnail:
+            "https://www.themoviedb.org/t/p/w1280/tNQWO6cNzQYCyvw36mUcAQQyf5F.jpg",
+        name: "The Last of Us",
+        year: 2023,
+        genre: ["Drama"],
+        about: `Año 2023, veinte años después del comienzo de una plaga mundial que infectó a población con un hongo mutado transformando a las personas en unas criaturas caníbales, el contrabandista Joel tiene la misión de escoltar a la adolescente Ellie por un mundo postapocalíptico en el nada va a ser fácil para los viajeros. Joel todavía vive atormentado por el recuerdo de su única hija. Ellie es portadora de algo que podría cambiar el destino de la humanidad ¿Conseguirán sobrevivir los dos?`,
+    },
+    {
+        image: "https://media.themoviedb.org/t/p/w1066_and_h600_bestv2/oPgXVSdGR9dGwbmvIToOCMmsdc2.jpg",
+        thumbnail:
+            "https://www.themoviedb.org/t/p/w1280/gQCrYmvCK7JCLXjCGTMRF5Lzr5c.jpg",
+        name: "Ballerina",
+        year: 2025,
+        genre: ["Acción"],
+        about: `Eve Macarro intenta por todos los medios averiguar quién está detrás del asesinato de su padre. En su lucha por conocer la verdad, tendrá que atenerse a las normas de la Alta Mesa y, por supuesto, a las del Hotel Continental, donde descubrirá que existen secretos ocultos sobre su pasado.`,
+    },
+];
+const genres = [
+    { name: "Sci-fi", ids: { movie: 878, tv: 10765 } },
+    { name: "Drama", ids: { movie: 18, tv: 18 } },
+    { name: "Comedy", ids: { movie: 35, tv: 35 } },
+];
 ---
 
 <Layout>
-	<Hero client:visible />
-	<DailyTop type="movie" title="Daily top 10 movies"/>
-	<DailyTop type="tv" title="Daily top 10 tv series"/>
-	<Grid movies={movies} title={'Movies'} />
+    <Hero client:visible />
+    <DailyTop type="movie" title="Daily top 10 movies" />
+    <DailyTop type="tv" title="Daily top 10 tv series" />
+    {
+        genres.map((item) => (
+            <GenreBlock genreName={item.name} genreIds={item.ids} />
+        ))
+    }
+    <Grid movies={movies} title={"Movies"} />
 </Layout>
 
 <script>
-// const key = import.meta.env.PUBLIC_APIKEY;
+    // const key = import.meta.env.PUBLIC_APIKEY;
 
-//     const getTrendingMoviesdata = async () => {
-//         const resp = await fetch('https://api.themoviedb.org/3/trending/all/week?api_key='+key)
-//         const data = await resp.json()
-//         console.log(data.results.slice(0,5));
-        
-//     }
-//     getTrendingMoviesdata()
+    //     const getTrendingMoviesdata = async () => {
+    //         const resp = await fetch('https://api.themoviedb.org/3/trending/all/week?api_key='+key)
+    //         const data = await resp.json()
+    //         console.log(data.results.slice(0,5));
+
+    //     }
+    //     getTrendingMoviesdata()
+    const genre = { movie: 12, tv: 12 };
+    console.log(Object.keys(genre).length);
 </script>
