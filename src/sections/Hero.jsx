@@ -2,10 +2,10 @@ import { useEffect, useState } from "preact/hooks";
 import { SliderItem } from "../components/Slider/SliderItem";
 import { Thumbnail } from "../components/Slider/Thumbnail";
 import { useMovies } from "../Hooks/useMovies";
-export const Hero = () => {
+export const Hero = ({ type }) => {
     const [currentDirection, setCurrentDirection] = useState('')
     const [thumbnails, setThumbnails] = useState([])
-    const { movies, loading, error } = useMovies({ path: 'trending/all/week', params: { sort_by: "popularity.desc" } })
+    const { movies, loading, error } = useMovies({ path:`trending/${type}/week` , params: { sort_by: "popularity.desc" } })
     useEffect(() => {
         if (movies.length) {
             setThumbnails(movies.slice(0, 5));

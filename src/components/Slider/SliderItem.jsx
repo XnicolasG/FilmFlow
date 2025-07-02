@@ -20,8 +20,8 @@ export const SliderItem = ({ movies }) => {
                                 alt={movie.title} />
                                 <span className="item__cover absolute top-1 w-full h-full bg-black/50 "/>
                             <article className="content">
-                                <p>{movie.title}</p>
-                                <p>{movie.release_date}</p>
+                                <p>{movie.title || movie.name }</p>
+                                <p>{movie.release_date || movie.first_air_date }</p>
                                 <div className='flex gap-x-2'>
                                     {
                                         genres.map((genre, i) => (

@@ -4,7 +4,7 @@ import { useMovies } from "../../Hooks/useMovies"
 
 export const MovieCards = ({ genre, genreIds }) => {
     const sliderRef = useRef(null);
-    const scrollAmount = 840;
+    const scrollAmount = 885;
 
     const scrollLeft = () => {
         if (sliderRef.current) sliderRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
@@ -31,7 +31,8 @@ export const MovieCards = ({ genre, genreIds }) => {
     if (genreIds.movie) data.push(...moviesData.map((movie) => ({ ...movie, media_type: 'movie' })))
     if (genreIds.tv) data.push(...tvData.map((tv) => ({ ...tv, media_type: 'tv' })))
 
-
+    
+        
     const sorted = data.sort((a, b) => b.popularity - a.popularity)
 
 
@@ -39,12 +40,12 @@ export const MovieCards = ({ genre, genreIds }) => {
         <section className='relative text-slate-100 overflow-hidden '>
             <button
                 onClick={scrollLeft}
-                className='absolute group top-1/2 left-0  bg-red-600 h-full'>
+                className='absolute group top-1/2 left-0 z-10'>
                 <Arrow style='group-hover:text-black'/>
             </button>
             <ul
                 ref={sliderRef}
-                className='genreCard_Slider flex gap-x-5 overflow-x-auto scroll-smooth'>
+                className='genreCard_Slider flex gap-x-5 p-1 overflow-x-auto scroll-smooth'>
                 {
                     sorted.slice(0, 20).map((item) => (
 
@@ -52,8 +53,8 @@ export const MovieCards = ({ genre, genreIds }) => {
                             key={item.id}
                             className=''
                         >
-                            <figure className='w-42 '>
-                                <img className='w-full' src={`https://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt={``} />
+                            <figure className='w-42 overflow-hidden rounded outline-2 outline-transparent hover:outline-2 hover:outline-amber-50 transition-all duration-200'>
+                                <img className='w-full hover:scale-110 transition-all duration-200' src={`https://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt={``} />
                             </figure>
                         </li>
                     ))

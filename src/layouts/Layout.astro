@@ -1,21 +1,29 @@
 ---
+import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Navbar from "../components/Navbar/Navbar.astro";
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>FilmFlow Movie App</title>
+		<title>{title}</title>
 		<!-- <link rel="stylesheet" href="../../src/styles/global.css"> -->
 		<ClientRouter />
 	</head>
-	<body class="bg-gray-950">
-	<Navbar />
+	<body class="bg-gray-950 overflow-x-hidden">
+		<Navbar />
 
 		<slot />
 	</body>

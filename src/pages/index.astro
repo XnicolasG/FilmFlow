@@ -1,5 +1,5 @@
 ---
-import "../styles/global.css";
+// import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import { Hero } from "../sections/Hero";
 import DailyTop from "../sections/DailyTop.astro";
@@ -55,8 +55,11 @@ const genres = [
 ];
 ---
 
-<Layout>
-    <Hero client:visible />
+<Layout
+title='FilmFlow movies app'
+description='Movies and series app where you can find trending tv shows and movies and look for its information, such as release date, genre, cast, description, etc..'
+>
+    <Hero type="all" client:visible />
     <DailyTop type="movie" title="Daily top 10 movies" />
     <DailyTop type="tv" title="Daily top 10 tv series" />
     {

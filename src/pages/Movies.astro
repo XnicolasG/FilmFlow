@@ -1,0 +1,22 @@
+---
+import { array } from "astro:schema";
+import Layout from "../layouts/Layout.astro";
+import DailyTop from "../sections/DailyTop.astro";
+import { Hero } from "../sections/Hero";
+
+import { loadGenreMap, mapGenres } from "../utils/genreHelper";
+
+let genres: { name: string, tv: string }[] = [];
+const loadGenres = async () => await loadGenreMap();
+console.log(await loadGenres());
+Object.entries(await loadGenres()).map(([id, name]) => genres.push({name: name, tv: id }));
+console.log(genres);
+---
+
+<Layout
+    title="FilmFlow - Movies"
+    description="Here you can check for all the movies in the catalog of The Movies Database"
+>
+    <Hero type="movie" client:visible />
+    <DailyTop type="movie" title="Daily top 10 movies" />
+</Layout>
