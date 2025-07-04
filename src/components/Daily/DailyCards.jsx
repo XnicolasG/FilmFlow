@@ -1,9 +1,9 @@
 import { useRef } from 'preact/hooks';
-import { useMovies } from '../../Hooks/useMovies';
+import { useMediaFetch } from '../../Hooks/useMediaFetch';
 import { Arrow } from '../../../public/icons/Arrow';
 
 export const DailyCards = ({ type }) => {
-    const { movies, loading, error } = useMovies({ path: `trending/${type}/day`, params: { sort_by: "popularity.desc" } })
+    const { movies, loading, error } = useMediaFetch({ path: `trending/${type}/day`, params: { sort_by: "popularity.desc" } })
     const sliderRef = useRef(null);
     const scrollAmount = 320;
 

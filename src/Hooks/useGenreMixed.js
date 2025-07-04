@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "preact/hooks"
-
+import { apiClient } from "../lib/apiClient";
 
 export const useGenreMixed = ({ genreName, genreIds, limit = 20, sortKey = 'popularity.desc' }) => {
     const [items, setItems] = useState([]);
@@ -16,9 +16,13 @@ export const useGenreMixed = ({ genreName, genreIds, limit = 20, sortKey = 'popu
                 const results = [];
 
                 if (genreIds.movie) {
-                    const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${stableGenreIds.movie}&sort_by=${sortKey}&language=en-US`)
-                    const data = await res.json()
-                    // console.error(data);
+                    const { data } = await apiClient.get(`discover/movie`, {
+                        params: {
+                            with_genres: stableGenreIds.movie,
+                            sort_by: sortKey,
+                            language: 'en-US'
+                        }
+                    })
                     if (data.results.length !== 0) {
 
                         const movies = data.results.map((item) => ({
@@ -30,8 +34,13 @@ export const useGenreMixed = ({ genreName, genreIds, limit = 20, sortKey = 'popu
                     }
                 }
                 if (genreIds.tv) {
-                    const res = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_genres=${stableGenreIds.tv}&sort_by=${sortKey}&language=en-US`)
-                    const data = await res.json()
+                    const { data } = await apiClient.get(`discover/tv`, {
+                        params: {
+                            with_genres: stableGenreIds.tv,
+                            sort_by: sortKey,
+                            language: 'en-US'
+                        }
+                    })
                     if (data.results.length !== 0) {
                         const shows = data.results.map((item) => ({
                             ...item,
@@ -39,15 +48,12 @@ export const useGenreMixed = ({ genreName, genreIds, limit = 20, sortKey = 'popu
                         }))
                         results.push(...shows)
                     }
-                    // else if (results.length === 0) {
-                    //     console.warn(`❌ No se encontraron resultados para ${genreName}, ${results}`);
-                    // }
                 }
                 const sorted = results
                     .filter((item => item.poster_path))
                     .sort((a, b) => b.popularity - a.popularity)
                     .slice(0, limit)
-                setItems(sorted.filter((item) => item.lenght !== 0))
+                setItems(sorted)
                 setLoading(false)
             } catch (error) {
                 console.error('error at useGenreMixed', error);

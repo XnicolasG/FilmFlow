@@ -1,12 +1,13 @@
 import { useEffect, useState } from "preact/hooks";
 import { SliderItem } from "../components/Slider/SliderItem";
 import { Thumbnail } from "../components/Slider/Thumbnail";
-import { useMovies } from "../Hooks/useMovies";
+import { useMediaFetch } from "../Hooks/useMediaFetch";
 export const Hero = ({ type }) => {
     const [currentDirection, setCurrentDirection] = useState('')
     const [thumbnails, setThumbnails] = useState([])
-    const { movies, loading, error } = useMovies({ path:`trending/${type}/week` , params: { sort_by: "popularity.desc" } })
-    useEffect(() => {
+    const { movies, loading, error } = useMediaFetch({ path:`trending/${type}/week` , params: { sort_by: "popularity.desc" } }) 
+    
+    useEffect(() => {   
         if (movies.length) {
             setThumbnails(movies.slice(0, 5));
         }

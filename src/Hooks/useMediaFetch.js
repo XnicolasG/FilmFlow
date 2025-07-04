@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'preact/hooks'
+import { FetchFromTMBD } from '../lib/api/FetchFromTMBD'
 
-export const useMovies = ({ path, params = {} }) => {
+export const useMediaFetch = ({ path, params = {} }) => {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     useEffect(() => {
-        const key = import.meta.env.PUBLIC_APIKEY;
-        const query = new URLSearchParams({ api_key: key, ...params })
-
         const getData = async () => {
             try {
-                const res = await fetch(`https://api.themoviedb.org/3/${path}?${query}`)
-                const data = await res.json()
+                const results = await FetchFromTMBD(path, params)
                 setLoading(false)
-                setMovies(data.results || [])
+                setMovies(results)
             } catch (error) {
                 console.log(error);
                 setError(error.message || 'Something went wrong loading the data')
@@ -22,5 +19,5 @@ export const useMovies = ({ path, params = {} }) => {
         }
         getData()
     }, [path, JSON.stringify(params)])
-    return {movies, loading, error}
+    return { movies, loading, error }
 }

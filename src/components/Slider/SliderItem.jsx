@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks"
+import { useEffect } from "preact/hooks"
 import { loadGenreMap, mapGenres } from "../../utils/genreHelper"
 
 export const SliderItem = ({ movies }) => {
