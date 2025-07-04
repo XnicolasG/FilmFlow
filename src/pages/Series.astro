@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import DailyTop from "../sections/DailyTop.astro";
+import { GenreBlock } from "../sections/GenreBlock"
+import { Hero } from "../sections/Hero";
+import { loadGenreMap } from "../utils/genreHelper";
+
+let genres: { name: string, ids: {tv: number }}[] = [];
+const loadGenres = async () => await loadGenreMap('tv');
+Object.entries(await loadGenres()).map(([id, name]) => genres.push({name: name, ids:{ tv: Number(id)} }));
+console.log('genre_TV :', genres);
+---
+
+<Layout
+    title="FilmFlow - Tv Shows"
+    description="Here you can check for all the tv shows in the catalog of The Movies Database"
+>
+    <Hero type="tv" client:visible />
+    <DailyTop type="tv" title="Daily top 10 movies" />
+    {
+        genres.map((item) => (
+            <GenreBlock genreName={item.name} genreIds={item.ids} client:visible />
+        ))
+    }
+</Layout>

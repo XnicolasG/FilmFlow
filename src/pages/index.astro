@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import { Hero } from "../sections/Hero";
 import DailyTop from "../sections/DailyTop.astro";
 import Grid from "../components/Grid/Grid.astro";
-import GenreBlock from "../sections/GenreBlock.astro";
+import {GenreBlock} from "../sections/GenreBlock";
 
 const key = import.meta.env.PUBLIC_APIKEY;
 
@@ -64,7 +64,7 @@ description='Movies and series app where you can find trending tv shows and movi
     <DailyTop type="tv" title="Daily top 10 tv series" />
     {
         genres.map((item) => (
-            <GenreBlock genreName={item.name} genreIds={item.ids} />
+            <GenreBlock genreName={item.name} genreIds={item.ids} client:visible />
         ))
     }
     <Grid movies={movies} title={"Movies"} />

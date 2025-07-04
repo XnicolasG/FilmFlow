@@ -1,16 +1,15 @@
 ---
-import { array } from "astro:schema";
 import Layout from "../layouts/Layout.astro";
 import DailyTop from "../sections/DailyTop.astro";
 import { Hero } from "../sections/Hero";
+import { GenreBlock } from "../sections/GenreBlock"
+import { loadGenreMap } from "../utils/genreHelper";
 
-import { loadGenreMap, mapGenres } from "../utils/genreHelper";
+let genres: { name: string, ids: {movie: number }}[] = [];
+const loadGenres = await loadGenreMap();
+Object.entries(loadGenres).map(([id, name]) => genres.push({name: name, ids:{ movie: Number(id)} }));
+console.warn('genres :', genres);
 
-let genres: { name: string, tv: string }[] = [];
-const loadGenres = async () => await loadGenreMap();
-console.log(await loadGenres());
-Object.entries(await loadGenres()).map(([id, name]) => genres.push({name: name, tv: id }));
-console.log(genres);
 ---
 
 <Layout
@@ -19,4 +18,9 @@ console.log(genres);
 >
     <Hero type="movie" client:visible />
     <DailyTop type="movie" title="Daily top 10 movies" />
+    {
+        genres.map((item) => (
+            <GenreBlock genreName={item.name} genreIds={item.ids} client:visible />
+        ))
+    }
 </Layout>
