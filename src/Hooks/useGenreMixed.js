@@ -28,7 +28,8 @@ export const useGenreMixed = ({ genreName, genreIds, limit = 20, sortKey = 'popu
                         const movies = data.results.map((item) => ({
                             ...item,
                             genreName: genreName,
-                            media_type: 'movie'
+                            media_type: 'movie',
+                            source: 'discover'
                         }))
                         results.push(...movies)
                     }
@@ -44,7 +45,9 @@ export const useGenreMixed = ({ genreName, genreIds, limit = 20, sortKey = 'popu
                     if (data.results.length !== 0) {
                         const shows = data.results.map((item) => ({
                             ...item,
-                            media_type: 'tv'
+                            genreName: genreName,
+                            media_type: 'tv',
+                            source: 'discover'
                         }))
                         results.push(...shows)
                     }
