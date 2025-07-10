@@ -15,8 +15,8 @@ export const getStaticPaths = async () => {
 };
 
 const { source, type, id } = Astro.params;
-const res = await apiClient.get(`/${type}/${id}`, { 
-  params: { language: 'en-US' }
+const res = await apiClient.get(`/${type}/${id}`, {
+    params: { language: "en-US" },
 });
 
 const media = res.data;
@@ -24,11 +24,45 @@ console.log(media);
 
 // Opcional: título que se adapta según si es movie o tv
 const pageTitle = media.title || media.name;
-
 ---
 
 <Layout title={pageTitle} description={media.overview}>
-    <main class="w-svw h-svh pt-16 ">
-        <h1 class="p-4 text-white text-xl">{media.overview}</h1>
+    <main class="w-svw h-svh pt-14">
+        <section
+            style={`background-image: url('https://image.tmdb.org/t/p/w1280${media.backdrop_path}'); position: relative; height: 55vh; width: 100%; background-size: cover; background-position: center;`}
+        >
+            <article
+                class="flex flex-col items-center p-4 text-pretty w-full h-full bg-black/60 text-white"
+            >
+                <h1 class="text-4xl font-semibold">
+                    {media?.title} - ({media.release_date.slice(0, 4)})
+                </h1>
+                <article
+                    class="grid md:grid-cols-[1fr_2fr] grid-rows-4 gap-3 mt-4"
+                >
+                    <p class="col-start-2 italic text-lg text-sky-300">
+                        "{media?.tagline}"
+                    </p>
+                    <div class="col-start-2">
+                        <label class="text-xl font-semibold" for=""
+                            >Overview:</label
+                        >
+                        <p class="text-white">{media?.overview}</p>
+                    </div>
+                    <div class="col-start-2 flex items-center gap-2">
+                        {media?.genres.map((genre: {id:number, name:string}) => <p class="w-fit px-2 rounded-xl bg-black/70 ring-2 ring-sky-700">{genre.name}</p>)}
+                    </div>
+                </article>
+            </article>
+        </section>
+        <figure
+            class="absolute flex bottom-36 shadow-sm shadow-amber-50 left-14 w-52 h-64 rounded overflow-hidden"
+        >
+            <img
+                class="w-full h-full"
+                src={`https://image.tmdb.org/t/p/w1280${media?.poster_path}`}
+                alt={media?.title}
+            />
+        </figure>
     </main>
 </Layout>
