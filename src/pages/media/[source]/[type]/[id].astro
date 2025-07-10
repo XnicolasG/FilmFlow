@@ -1,0 +1,34 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+import { apiClient } from "../../../../lib/apiClient";
+import { staticMediaItems } from "../../../../lib/staticMedia";
+
+export const getStaticPaths = async () => {
+    const items = await staticMediaItems();
+    return items.map((item) => ({
+        params: {
+            source: item.source,
+            type: item.media_type,
+            id: String(item.id),
+        },
+    }));
+};
+
+const { source, type, id } = Astro.params;
+const res = await apiClient.get(`/${type}/${id}`, { 
+  params: { language: 'en-US' }
+});
+
+const media = res.data;
+console.log(media);
+
+// Opcional: título que se adapta según si es movie o tv
+const pageTitle = media.title || media.name;
+
+---
+
+<Layout title={pageTitle} description={media.overview}>
+    <main class="w-svw h-svh pt-16 ">
+        <h1 class="p-4 text-white text-xl">{media.overview}</h1>
+    </main>
+</Layout>

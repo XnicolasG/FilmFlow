@@ -12,7 +12,6 @@ export const useGenreMixed = ({ genreName, genreIds, limit = 20, sortKey = 'popu
         const fetchingData = async () => {
             try {
 
-                const apiKey = import.meta.env.PUBLIC_APIKEY;
                 const results = [];
 
                 if (genreIds.movie) {

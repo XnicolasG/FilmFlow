@@ -4,7 +4,6 @@ import { useGenreMixed } from "../Hooks/useGenreMixed"
 
 export const GenreBlock = ({ genreName, genreIds }) => {
     const { items, loading, error } = useGenreMixed({ genreName, genreIds, limit: 21 })
-    // console.warn('items :', items);
 
 
     return (

@@ -6,7 +6,8 @@ export const DailyCards = ({ type }) => {
     const { movies, loading, error } = useMediaFetch({ path: `trending/${type}/day`, params: { sort_by: "popularity.desc" } })
     const sliderRef = useRef(null);
     const scrollAmount = 320;
-
+    console.log(movies);
+    
     const scrollLeft = () => {
         if (sliderRef.current) sliderRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     };
