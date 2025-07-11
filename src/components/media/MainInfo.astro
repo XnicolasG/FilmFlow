@@ -1,0 +1,64 @@
+---
+const { media } = Astro.props;
+
+type Company = {
+    id: number;
+    logo_path: string | null;
+    name: string;
+    origin_country: string;
+};
+
+console.log(media);
+---
+
+<article
+    class="flex flex-col col-start-2 p-4 text-pretty w-full h-full  text-white"
+>
+    <h1 class="text-4xl font-semibold">
+        {media?.title ? media?.title : media?.name} - ({
+            media?.release_date
+                ? media.release_date.slice(0, 4)
+                : media?.first_air_date?.slice(0, 4)
+        })
+    </h1>
+    <article
+        class="flex flex-col h-full grid-rows-[.5fr_1fr_.5fr_.5fr] gap-3 mt-4"
+    >
+        <p class="col-start-2 italic text-lg text-sky-300">
+            {media?.tagline ? `"${media.tagline}"` : ''}
+        </p>
+        <div class="col-start-2">
+            <label class="text-xl font-semibold" for="">Overview:</label>
+            <p class="text-white">{media?.overview}</p>
+        </div>
+        <div class="col-start-2 flex items-center gap-2">
+            {
+                media?.genres.map((genre: { id: number; name: string }) => (
+                    <p class="w-fit px-2 rounded-xl bg-black/70 ring-2 ring-sky-700">
+                        {genre.name}
+                    </p>
+                ))
+            }
+        </div>
+        <section class="col-start-2 flex gap-x-2 items-center">
+            {
+                media?.production_companies.map((company: Company) => (
+                    <div
+                        class={`${company.logo_path ? "flex flex-col  justify-center h-14 w-fit items-center shadow-md bg-white/40 ring-1 ring-white backdrop-blur-xs p-1 rounded" : "hidden"} `}
+                    >
+                        {company.logo_path && (
+                            <figure class="w-12 flex ">
+                                <img
+                                    title={company.name}
+                                    class="w-full"
+                                    src={`https://image.tmdb.org/t/p/w1280${company.logo_path}`}
+                                    alt={company.name}
+                                />
+                            </figure>
+                        )}
+                    </div>
+                ))
+            }
+        </section>
+    </article>
+</article>
