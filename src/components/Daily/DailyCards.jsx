@@ -37,7 +37,7 @@ export const DailyCards = ({ type }) => {
                                     ? color = 'bronce'
                                     : color = ''
                         return (
-                            <li className="relative dailyCards__item  shrink-0 w-44 h-72">
+                            <a href={`/media/${movie.source}/${movie.media_type}/${movie.id}`} className="relative dailyCards__item  shrink-0 w-44 h-72">
                                 <figure
                                     style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.poster_path})` }}
                                     className={`dailyCards__figure ${color} w-full h-full overflow-hidden rounded-lg group-hover:-z-10`}
@@ -45,7 +45,7 @@ export const DailyCards = ({ type }) => {
                                     <img className="relative" src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt={movie.title} />
                                 </figure>
                                 <p className={`dailyCards__number ${color} `}>{(i += 1)}</p>
-                            </li>
+                            </a> 
                         )
                     })
                 }

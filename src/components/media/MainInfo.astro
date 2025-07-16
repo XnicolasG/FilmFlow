@@ -1,4 +1,6 @@
 ---
+import RatingRing from "./RatingRing.astro";
+
 const { media } = Astro.props;
 
 type Company = {
@@ -9,10 +11,22 @@ type Company = {
 };
 
 console.log(media);
+
+const radius = 50
+const circumference = 2 * Math.PI * radius;
+const percentage = media?.vote_average / 10;
+const offset = circumference * (1 - percentage);
+
+const colorRating = (value: number) => {
+    if (value >= 7.5) return 'limegreen'
+    if (value >= 5.5) return 'gold'
+    if (value >= 3.5) return 'orange'
+    return 'crimson'
+}
 ---
 
 <article
-    class="flex flex-col col-start-2 p-4 text-pretty w-full h-full  text-white"
+    class="flex flex-col col-start-2 p-4 text-pretty w-full h-full text-white"
 >
     <h1 class="text-4xl font-semibold">
         {media?.title ? media?.title : media?.name} - ({
@@ -21,17 +35,15 @@ console.log(media);
                 : media?.first_air_date?.slice(0, 4)
         })
     </h1>
-    <article
-        class="flex flex-col h-full grid-rows-[.5fr_1fr_.5fr_.5fr] gap-3 mt-4"
-    >
-        <p class="col-start-2 italic text-lg text-sky-300">
-            {media?.tagline ? `"${media.tagline}"` : ''}
+    <article class="flex items-center gap-x-2 my-4 text-slate-100">
+        <p class="text-slate-200 font-light text-shadow-md text-shadow-black">
+            {media?.release_date ? media.release_date : media.first_air_date}
         </p>
-        <div class="col-start-2">
-            <label class="text-xl font-semibold" for="">Overview:</label>
-            <p class="text-white">{media?.overview}</p>
-        </div>
-        <div class="col-start-2 flex items-center gap-2">
+        <span
+            class={`${media?.status === "Released" ? "text-emerald-400" : "text-amber-400"} text-shadow-lg`}
+            >{media?.status}
+        </span>
+        <div class="flex flex-wrap mx-4 gap-2">
             {
                 media?.genres.map((genre: { id: number; name: string }) => (
                     <p class="w-fit px-2 rounded-xl bg-black/70 ring-2 ring-sky-700">
@@ -40,7 +52,19 @@ console.log(media);
                 ))
             }
         </div>
-        <section class="col-start-2 flex gap-x-2 items-center">
+    </article>
+    <article class="flex flex-col h-full gap-3 mt-4">
+        <p class="italic text-lg text-sky-300">
+            {media?.tagline ? `"${media.tagline}"` : ""}
+        </p>
+        <div class="">
+            <label class="text-xl font-semibold" for=""> Overview: </label>
+            <p class="text-white">{media?.overview}</p>
+        </div>
+        <section>
+           <RatingRing value={media?.vote_average} />
+        </section>
+        <section class="flex flex-wrap gap-3 my-4">
             {
                 media?.production_companies.map((company: Company) => (
                     <div
@@ -62,3 +86,4 @@ console.log(media);
         </section>
     </article>
 </article>
+

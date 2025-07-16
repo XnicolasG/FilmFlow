@@ -1,0 +1,69 @@
+---
+const { value } = Astro.props
+
+const radius = 50
+const circumference = 2 * Math.PI * radius;
+const percentage = value / 10;
+const offset = circumference * (1 - percentage);
+
+const colorRating = (value: number) => {
+    if (value >= 7.5) return 'limegreen'
+    if (value >= 5.5) return 'gold'
+    if (value >= 3.5) return 'orange'
+    return 'crimson'
+}
+---
+
+<svg
+    width="120"
+    height="120"
+    style=""
+    class="progress-ring transition-all duration-500 opacity-0 scale-75"
+>
+    <circle
+        cx="60"
+        cy="60"
+        r={radius}
+        fill="none"
+        stroke="#222"
+        stroke-width="10"></circle>
+
+    <circle
+        id="progressCircle"
+        cx="60"
+        cy="60"
+        r={radius}
+        fill="none"
+        data-offset={offset}
+        stroke={colorRating(value)}
+        stroke-dasharray={circumference}
+        stroke-dashoffset={circumference}
+        stroke-width="10"
+        stroke-linecap="round"
+        transform="rotate(-90 60 60)"
+        style="transition: stroke-dashoffset 1s ease-out"></circle>
+    <text
+        x="60"
+        y="65"
+        text-anchor="middle"
+        fill={colorRating(value)}
+        font-size="18"
+        font-weight="bold"
+    >
+        {(value.toFixed(1)/10) * 100}%
+    </text>
+</svg>
+
+<script>
+  const circle = document.getElementById("progressCircle");
+  const svg = document.querySelector(".progress-ring") as HTMLElement;
+
+  if (circle && svg) {
+    const offset = circle.dataset.offset ?? '0';
+    requestAnimationFrame(() => {
+      circle.style.strokeDashoffset = offset;
+      svg.style.opacity = "1";
+      svg.style.transform = "scale(1)";
+    });
+  }
+</script>
