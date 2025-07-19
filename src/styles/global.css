@@ -279,3 +279,9 @@ button {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 4%;
 }
+.castGrid__container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+    gap: 4%;
+    padding-block: 2%;
+}
