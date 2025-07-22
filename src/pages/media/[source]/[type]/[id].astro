@@ -33,7 +33,7 @@ type Cast = {
 
 const { source, type, id } = Astro.params;
 const { cast, crew } = await getCredits(type, id);
-console.log(cast);
+console.log(crew.slice(0,5));
 
 const res = await apiClient.get(`/${type}/${id}`, {
     params: { language: "en-US" },
@@ -53,7 +53,7 @@ const pageTitle = media.title || media.name;
             position: relative; height: 60vh; width: 100%; background-size: cover; background-position: center;`}
         >
             <div class="grid grid-cols-[1fr_2fr] w-full h-full bg-black/60">
-                <MainInfo media={media} />
+                <MainInfo media={media} type={type} id={id}  />
             </div>
         </section>
         <figure
@@ -66,23 +66,23 @@ const pageTitle = media.title || media.name;
             />
         </figure>
         <section
-            class="w-full grid grid-cols-[2fr_1fr] border-t-4 border-orange-100 p-4"
+            class="w-full grid grid-cols-[2fr_1fr] border-t-4 mb-6 border-orange-100 p-4"
         >
-        <h4 class="text-2xl font-semibold mt-22 text-slate-50">Cast:</h4>
-            <div class="col-start-1  castGrid__container">
+        <h4 class="text-2xl font-semibold mt-20 mb-4 text-slate-50">Cast:</h4>
+            <div class="col-start-1 flex gap-x-4 overflow-x-scroll scrollbar-styled">
                 {
                     cast.slice(0, 10).map((person: Cast) => (
-                        <article class="h-fit">
-                            <figure class="w-44 h-56 overflow-hidden rounded rounded-b-none">
+                        <article class="group h-fit ">
+                            <figure class="w-44 h-56 overflow-hidden rounded-lg rounded-b-none">
                                 <img
-                                    class="w-full h-full object-cover"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-all duration-200"
                                     src={`https://image.tmdb.org/t/p/w1280${person.profile_path}`}
                                     alt={person.name}
                                 />
                             </figure>
-                            <section class="w-44 px-2 ">
-                                <p class="font-semibold text-slate-50">{person.name}</p>
-                                <p class="italic text-sky-300/80">{person.character}</p>
+                            <section class="w-44 px-2 rounded-lg rounded-t-none group-hover:bg-amber-50 transition-colors duration-200 ">
+                                <p class="font-semibold text-slate-50 group-hover:text-black/90">{person.name}</p>
+                                <p class="italic text-sky-300/80 group-hover:text-sky-600">{person.character}</p>
                             </section>
                         </article>
                     ))
@@ -91,3 +91,6 @@ const pageTitle = media.title || media.name;
         </section>
     </main>
 </Layout>
+
+<!-- trailer (modal animado), al lado de frase, crew principal al lado de rating, 
+ segunda columna de grid bajo, información como duración, presupuesto,website, paises de producción -->

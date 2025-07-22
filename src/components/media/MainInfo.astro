@@ -1,7 +1,8 @@
 ---
 import RatingRing from "./RatingRing.astro";
+import { Trailer } from "./Trailer";
 
-const { media } = Astro.props;
+const { media, type, id } = Astro.props;
 
 type Company = {
     id: number;
@@ -67,7 +68,8 @@ console.log(media);
                     </article>
                 </div>
             </section>
-            <div class="p-2">
+            <Trailer type={type} id={id} client:load />
+            <!-- <div class="p-2">
                 <h4 class="text-xl font-semibold">Production:</h4>
                 <section class="flex flex-wrap gap-3 bg-white/60 p-1 rounded backdrop-blur-sm my-4">
                     {
@@ -89,7 +91,7 @@ console.log(media);
                         ))
                     }
                 </section>
-            </div>
+            </div> -->
         </div>
     </article>
 </article>

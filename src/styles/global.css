@@ -279,9 +279,24 @@ button {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 4%;
 }
-.castGrid__container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
-    gap: 4%;
-    padding-block: 2%;
+/* Scroll estilizado para navegadores basados en WebKit */
+.scrollbar-styled::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-styled::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-styled::-webkit-scrollbar-thumb {
+  background-color: oklch(94.145% 0.06466 94.967); 
+  border-radius: 100px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* scroll - Firefox */
+.scrollbar-styled {
+  scrollbar-color: oklch(94.145% 0.06466 94.967) transparent;
+  scrollbar-width: thin;
 }
