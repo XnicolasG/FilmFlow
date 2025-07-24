@@ -12,13 +12,15 @@ const colorRating = (value: number) => {
     if (value >= 3.5) return 'orange'
     return 'crimson'
 }
+console.log('rating:', value); 
+
 ---
 
 <svg
     width="120"
     height="120"
     style=""
-    class="progress-ring transition-all duration-500 opacity-0 scale-75"
+    class="progress-ring transition-all duration-500 opacity-0 scale-90 group-hover:scale-95"
 >
     <circle
         cx="60"

@@ -53,11 +53,11 @@ console.log(media);
         </div>
         <div class="flex gap-x-10">
             <section
-                class="group p-2 ring-2 ring-transparent rounded hover:scale-110 hover:ring-white/60 hover:shadow-lg hover:backdrop-blur-xs transition-all duration-150"
+                class="group p-1 "
             >
                 <h4 class="text-xl font-semibold">Ratings:</h4>
                 <div class="flex gap-x-4">
-                    <RatingRing value={media?.vote_average} />
+                    <RatingRing value={media?.vote_average} /> 
                     <article class="flex flex-col justify-center items-center">
                         <p
                             class="text-2xl group-hover:text-blue-500 font-semibold transition-all duration-150"
