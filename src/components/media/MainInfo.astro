@@ -1,4 +1,5 @@
 ---
+import { Bookmark } from "../../../public/icons/Bookmark";
 import RatingRing from "./RatingRing.astro";
 import { Trailer } from "./Trailer";
 
@@ -44,9 +45,14 @@ console.log(media);
         </div>
     </article>
     <article class="flex flex-col h-full gap-3 mt-4">
-        <p class="italic text-lg text-sky-300">
-            {media?.tagline ? `"${media.tagline}"` : ""}
-        </p>
+        <div class="flex items-center gap-x-6">
+            <p class="italic text-lg text-sky-300">
+                {media?.tagline ? `"${media.tagline}"` : ""}
+            </p>
+            <Trailer type={type} id={id} client:load />
+            <Bookmark styles={'font-medium'} />
+        </div>
+
         <div class="">
             <label class="text-xl font-semibold" for=""> Overview: </label>
             <p class="text-white">{media?.overview}</p>
@@ -68,7 +74,6 @@ console.log(media);
                     </article>
                 </div>
             </section>
-            <Trailer type={type} id={id} client:load />
             <!-- <div class="p-2">
                 <h4 class="text-xl font-semibold">Production:</h4>
                 <section class="flex flex-wrap gap-3 bg-white/60 p-1 rounded backdrop-blur-sm my-4">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { getVideos } from "../../lib/api/video/getVideo";
+import { Play } from "../../../public/icons/Play";
 
 export const Trailer = ({ type, id }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,16 +23,18 @@ export const Trailer = ({ type, id }) => {
     fetchTrailer();
   }, [type, id]);
 
-  
+
   if (!key) return null;
 
   return (
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className=" text-blue-500"
+        className="button_trailer group relative "
       >
-        Trailer
+       
+        <Play classes=' z-20' />
+        <span className='z-20'> Trailer </span>
       </button>
 
       {isOpen && key && (

@@ -1,0 +1,31 @@
+---
+const { cast } = Astro.props;
+import type { Cast } from "@/types";
+---
+
+
+<h4 class="text-2xl font-semibold mt-20 mb-4 text-slate-50">Cast:</h4>
+<div class="col-start-1 flex gap-x-4 overflow-x-scroll scrollbar-styled">
+    {
+        cast.slice(0, 10).map((person: Cast) => (
+            <article class="group h-fit ">
+                <figure class="w-44 h-56 overflow-hidden rounded-lg rounded-b-none">
+                    <img
+                        class="w-full h-full object-cover group-hover:scale-110 transition-all duration-200"
+                        src={`https://image.tmdb.org/t/p/w1280${person.profile_path}`}
+                        alt={person.name}
+                    />
+                </figure>
+                <section class="w-44 px-2 rounded-lg rounded-t-none group-hover:bg-amber-50 transition-colors duration-200 ">
+                    <p class="font-semibold text-slate-50 group-hover:text-black/90">
+                        {person.name}
+                    </p>
+                    <p class="italic text-sky-300/80 group-hover:text-sky-600">
+                        {person.character}
+                    </p>
+                </section>
+            </article>
+        ))
+    }
+</div>
+

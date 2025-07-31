@@ -4,6 +4,7 @@ import MainInfo from "../../../../components/media/MainInfo.astro";
 import { apiClient } from "../../../../lib/apiClient";
 import { staticMediaItems } from "../../../../lib/staticMedia";
 import { getCredits } from "../../../../lib/api/credits/getCredits";
+import Cast from "../../../../sections/singlePages/Cast.astro";
 
 export const getStaticPaths = async () => {
     const items = await staticMediaItems();
@@ -16,31 +17,30 @@ export const getStaticPaths = async () => {
     }));
 };
 
-type Cast = {
-    adult: boolean;
-    gender: number;
-    id: number;
-    known_for_department: string;
-    name: string;
-    original_name: string;
-    popularity: number;
-    profile_path: string;
-    cast_id: number;
-    character: string;
-    credit_id: string;
-    order: number;
-};
+import type { CrewMember } from "@/types";
 
 const { source, type, id } = Astro.params;
 const { cast, crew } = await getCredits(type, id);
-console.log(crew.slice(0,5));
+
+const topRoles = [
+    "Director",
+    "Writer",
+    "Screenplay",
+    "Original Music Composer",
+    "Producer",
+];
+
+const MainCrew = crew.filter((member: CrewMember) =>
+    topRoles.includes(member.job),
+);
+
+console.log(MainCrew, MainCrew.length);
 
 const res = await apiClient.get(`/${type}/${id}`, {
     params: { language: "en-US" },
 });
 
 const media = res.data;
-console.log(media);
 
 const pageTitle = media.title || media.name;
 ---
@@ -48,12 +48,12 @@ const pageTitle = media.title || media.name;
 <Layout title={pageTitle} description={media.overview}>
     <main class="w-svw h-svh pt-14">
         <section
-            class=""
+            class="min-h-[60%]"
             style={`background-image: url('https://image.tmdb.org/t/p/w1280${media.backdrop_path}'); 
-            position: relative; height: 60vh; width: 100%; background-size: cover; background-position: center;`}
+            position: relative; width: 100%; background-size: cover; background-position: center;`}
         >
             <div class="grid grid-cols-[1fr_2fr] w-full h-full bg-black/60">
-                <MainInfo media={media} type={type} id={id}  />
+                <MainInfo media={media} type={type} id={id} />
             </div>
         </section>
         <figure
@@ -66,28 +66,44 @@ const pageTitle = media.title || media.name;
             />
         </figure>
         <section
-            class="w-full grid grid-cols-[2fr_1fr] border-t-4 mb-6 border-orange-100 p-4"
+            class="w-full grid grid-cols-[2fr_1fr] gap-x-6 border-t-4 mb-6 border-orange-100 p-4"
         >
-        <h4 class="text-2xl font-semibold mt-20 mb-4 text-slate-50">Cast:</h4>
-            <div class="col-start-1 flex gap-x-4 overflow-x-scroll scrollbar-styled">
+            <Cast cast={cast} />
+            <h4 class="text-2xl font-semibold text-slate-50">Crew:</h4>
+            <section class="col-start-2 grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] gap-6 p-4">
                 {
-                    cast.slice(0, 10).map((person: Cast) => (
-                        <article class="group h-fit ">
-                            <figure class="w-44 h-56 overflow-hidden rounded-lg rounded-b-none">
-                                <img
-                                    class="w-full h-full object-cover group-hover:scale-110 transition-all duration-200"
-                                    src={`https://image.tmdb.org/t/p/w1280${person.profile_path}`}
-                                    alt={person.name}
-                                />
-                            </figure>
-                            <section class="w-44 px-2 rounded-lg rounded-t-none group-hover:bg-amber-50 transition-colors duration-200 ">
-                                <p class="font-semibold text-slate-50 group-hover:text-black/90">{person.name}</p>
-                                <p class="italic text-sky-300/80 group-hover:text-sky-600">{person.character}</p>
-                            </section>
-                        </article>
-                    ))
+                    MainCrew.map((person: CrewMember) => {
+                        const imageUrl = person.profile_path
+                            ? `https://image.tmdb.org/t/p/w300${person.profile_path}`
+                            : "https://www.pngitem.com/pimgs/m/22-223978_transparent-no-avatar-png-pyrenees-png-download.png";
+
+                        return (
+                            <article
+                                key={`${person.id}`}
+                                class="flex flex-col items-center text-center gap-2"
+                                aria-label={`Perfil de ${person.name}`}
+                            >
+                                <figure class="w-20 h-20 rounded-full overflow-hidden border border-slate-600 shadow-md">
+                                    <img
+                                        src={imageUrl}
+                                        alt={`Foto de ${person.name}`}
+                                        class="w-full h-full object-cover"
+                                    />
+                                </figure>
+                                <section class="text-sm">
+                                    <h3 class="font-semibold text-slate-50">
+                                        {person.name}
+                                    </h3>
+                                    <p class="text-sky-300/80">{person.job}</p>
+                                    <footer class="text-slate-400 text-xs">
+                                        {person.department}
+                                    </footer>
+                                </section>
+                            </article>
+                        );
+                    })
                 }
-            </div>
+            </section>
         </section>
     </main>
 </Layout>

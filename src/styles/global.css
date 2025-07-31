@@ -300,3 +300,21 @@ button {
   scrollbar-color: oklch(94.145% 0.06466 94.967) transparent;
   scrollbar-width: thin;
 }
+
+.button_trailer{
+    @apply  w-fit bg-transparent overflow-hidden flex items-center relative font-medium 
+}
+.button_trailer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: oklch(50% 0.134 242.749); 
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+.button_trailer:hover::before {
+  transform: scaleX(1);
+}
