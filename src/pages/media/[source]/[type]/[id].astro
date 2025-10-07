@@ -66,20 +66,20 @@ const pageTitle = media.title || media.name;
             />
         </figure>
         <section
-            class="w-full grid grid-cols-[2fr_1fr] gap-x-6 border-t-4 mb-6 border-orange-100 p-4"
+            class="w-full grid  gap-6 border-t-4 mb-6 border-orange-100 p-4"
         >
             <Cast cast={cast} />
             <h4 class="text-2xl font-semibold text-slate-50">Crew:</h4>
-            <section class="col-start-2 grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] gap-6 p-4">
+            <section class=" grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] gap-6 p-2">
                 {
-                    MainCrew.map((person: CrewMember) => {
+                    crew.slice(0,10).map((person: CrewMember) => {
                         const imageUrl = person.profile_path
                             ? `https://image.tmdb.org/t/p/w300${person.profile_path}`
                             : "https://www.pngitem.com/pimgs/m/22-223978_transparent-no-avatar-png-pyrenees-png-download.png";
 
                         return (
                             <article
-                                key={`${person.id}`}
+                                key={person.id}
                                 class="flex flex-col items-center text-center gap-2"
                                 aria-label={`Perfil de ${person.name}`}
                             >
